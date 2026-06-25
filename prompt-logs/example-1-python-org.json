@@ -1,0 +1,135 @@
+{
+  "timestamp": "2026-06-25T10:17:56.2725018Z",
+  "systemPrompt": "You are a senior website auditor at a digital marketing agency that builds\nhigh-performing, SEO-focused marketing websites. You audit ONE web page.\n\nRules:\n- You are given FACTUAL METRICS already extracted from the page. Treat them as\n  ground truth. Never estimate, recompute, or invent a metric.\n- Every insight and every recommendation MUST cite specific metric values by name\n  and number (e.g. \u0022with 2 H1 tags\u0022 or \u002247% of images missing alt text\u0022).\n- Be specific to THIS page. Never give advice that would apply to any website.\n- Frame everything in agency terms: SEO, conversion, content clarity, UX.\n- If a metric shows no problem, say so briefly \u2014 do not manufacture an issue.\n- Output ONLY valid JSON matching the provided schema. No prose, no markdown.",
+  "userPrompt": "Audit this single web page.\n\nFACTUAL METRICS AND OBJECTIVE SEVERITY FLAGS (ground truth \u2014 the severity flags were\ndecided in code from fixed thresholds; explain and prioritize them, do not re-decide\nseverity):\n\n{\r\n  \u0022metrics\u0022: {\r\n    \u0022wordCount\u0022: 1082,\r\n    \u0022h1Count\u0022: 5,\r\n    \u0022h2Count\u0022: 9,\r\n    \u0022h3Count\u0022: 0,\r\n    \u0022ctaCount\u0022: 11,\r\n    \u0022internalLinks\u0022: 133,\r\n    \u0022externalLinks\u0022: 79,\r\n    \u0022imageCount\u0022: 1,\r\n    \u0022imagesMissingAltCount\u0022: 0,\r\n    \u0022imagesMissingAltPercent\u0022: 0,\r\n    \u0022metaTitle\u0022: \u0022Welcome to Python.org\u0022,\r\n    \u0022metaDescription\u0022: \u0022The official home of the Python Programming Language\u0022\r\n  },\r\n  \u0022severityFlags\u0022: [\r\n    {\r\n      \u0022metric\u0022: \u0022h1Count\u0022,\r\n      \u0022value\u0022: 5,\r\n      \u0022severity\u0022: \u0022Warning\u0022,\r\n      \u0022rationale\u0022: \u0022A page should have exactly one H1 for clear SEO structure.\u0022\r\n    },\r\n    {\r\n      \u0022metric\u0022: \u0022imagesMissingAltPercent\u0022,\r\n      \u0022value\u0022: 0,\r\n      \u0022severity\u0022: \u0022Ok\u0022,\r\n      \u0022rationale\u0022: \u0022Most images have alt text.\u0022\r\n    },\r\n    {\r\n      \u0022metric\u0022: \u0022metaDescription\u0022,\r\n      \u0022value\u0022: \u0022present\u0022,\r\n      \u0022severity\u0022: \u0022Ok\u0022,\r\n      \u0022rationale\u0022: \u0022Meta description present.\u0022\r\n    },\r\n    {\r\n      \u0022metric\u0022: \u0022wordCount\u0022,\r\n      \u0022value\u0022: 1082,\r\n      \u0022severity\u0022: \u0022Ok\u0022,\r\n      \u0022rationale\u0022: \u0022Sufficient content depth.\u0022\r\n    }\r\n  ]\r\n}\n\nTRIMMED PAGE CONTENT (headings in document order, then the first 600 words\nof body text):\n\nHEADINGS:\r\nH1: Intuitive Interpretation\nH1: Compound Data Types\nH1: All the Flow You\u2019d Expect\nH1: Functions Defined\nH1: Quick \u0026 Easy to Learn\nH2: Get Started\nH2: Download\nH2: Docs\nH2: Jobs\nH2: Latest News\nH2: Upcoming Events\nH2: Success Stories\nH2: Use Python for\u2026\nH2: \u003E\u003E\u003E Python Software Foundation\r\n\r\nBODY (first 600 words):\r\nNotice: This page displays a fallback because interactive scripts did not run. Possible causes include disabled JavaScript or failure to load scripts or stylesheets. Skip to content \u25BC Close Python PSF Docs PyPI Jobs Community \u25B2 The Python Network Donate \u2261 Menu Search This Site GO A A Smaller Larger Reset Socialize LinkedIn Mastodon Chat on IRC Twitter About Applications Quotes Getting Started Help Python Brochure Downloads All releases Source code Windows macOS Android iOS Other Platforms License Alternative Implementations Documentation Docs Audio/Visual Talks Beginner\u0027s Guide FAQ Non-English Docs PEP Index Python Books Python Essays Community Diversity Mailing Lists IRC Forums PSF Annual Impact Report Python Conferences Special Interest Groups Python Logo Python Wiki Code of Conduct Community Awards Get Involved Shared Stories Success Stories Arts Business Education Engineering Government Scientific Software Development News Python News PSF Newsletter PSF News PyCon US News News from the Community Events Python Events User Group Events Python Events Archive User Group Events Archive Submit an Event \u003E_ Launch Interactive Shell # Simple arithmetic \u003E\u003E\u003E 1 / 2 0.5 \u003E\u003E\u003E 2 ** 3 8 \u003E\u003E\u003E 17 / 3 # true division returns a float 5.666666666666667 \u003E\u003E\u003E 17 // 3 # floor division 5 Intuitive Interpretation Calculations are simple with Python, and expression syntax is straightforward: the operators \u002B , - , * and / work as expected; parentheses () can be used for grouping. More about simple math functions in Python 3 . # Python 3: List comprehensions \u003E\u003E\u003E fruits = [ \u0027Banana\u0027 , \u0027Apple\u0027 , \u0027Lime\u0027 ] \u003E\u003E\u003E loud_fruits = [ fruit . upper () for fruit in fruits ] \u003E\u003E\u003E print ( loud_fruits ) [\u0027BANANA\u0027, \u0027APPLE\u0027, \u0027LIME\u0027] # List and the enumerate function \u003E\u003E\u003E list ( enumerate ( fruits )) [(0, \u0027Banana\u0027), (1, \u0027Apple\u0027), (2, \u0027Lime\u0027)] Compound Data Types Lists (known as arrays in other languages) are one of the compound data types that Python understands. Lists can be indexed, sliced and manipulated with other built-in functions. More about lists in Python 3 # For loop on a list \u003E\u003E\u003E numbers = [ 2 , 4 , 6 , 8 ] \u003E\u003E\u003E product = 1 \u003E\u003E\u003E for number in numbers : ... product = product * number ... \u003E\u003E\u003E print ( \u0027The product is:\u0027 , product ) The product is: 384 All the Flow You\u2019d Expect Python knows the usual control flow statements that other languages speak \u2014 if , for , while and range \u2014 with some of its own twists, of course. More control flow tools in Python 3 # Python 3: Fibonacci series up to n \u003E\u003E\u003E def fib ( n ): \u003E\u003E\u003E a , b = 0 , 1 \u003E\u003E\u003E while a \u003C n : \u003E\u003E\u003E print ( a , end = \u0027 \u0027 ) \u003E\u003E\u003E a , b = b , a \u002B b \u003E\u003E\u003E print () \u003E\u003E\u003E fib ( 1000 ) 0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 Functions Defined The core of extensible programming is defining functions. Python allows mandatory and optional arguments, keyword arguments, and even arbitrary argument lists. More about defining functions in Python 3 # Simple output (with Unicode) \u003E\u003E\u003E print ( \u0022Hello, I\u0027m Python!\u0022 ) Hello, I\u0027m Python! # Input, assignment \u003E\u003E\u003E name = input ( \u0027What is your name? \\n \u0027 ) \u003E\u003E\u003E print ( f \u0027Hi, { name } .\u0027 ) What is your name? Python Hi, Python. Quick \u0026 Easy to Learn Experienced programmers in any other language can pick up Python very quickly, and beginners find the clean syntax and indentation structure easy to learn. Whet your\n\nReturn ONLY JSON matching the schema: an \u0022insights\u0022 object with one entry per category\n(seoStructure, messagingClarity, ctaUsage, contentDepth, uxStructural) and a\n\u0022recommendations\u0022 array of 3 to 5 items.",
+  "structuredInput": {
+    "metrics": {
+      "wordCount": 1082,
+      "h1Count": 5,
+      "h2Count": 9,
+      "h3Count": 0,
+      "ctaCount": 11,
+      "internalLinks": 133,
+      "externalLinks": 79,
+      "imageCount": 1,
+      "imagesMissingAltCount": 0,
+      "imagesMissingAltPercent": 0,
+      "metaTitle": "Welcome to Python.org",
+      "metaDescription": "The official home of the Python Programming Language"
+    },
+    "severityFlags": [
+      {
+        "metric": "h1Count",
+        "value": 5,
+        "severity": "Warning",
+        "rationale": "A page should have exactly one H1 for clear SEO structure."
+      },
+      {
+        "metric": "imagesMissingAltPercent",
+        "value": 0,
+        "severity": "Ok",
+        "rationale": "Most images have alt text."
+      },
+      {
+        "metric": "metaDescription",
+        "value": "present",
+        "severity": "Ok",
+        "rationale": "Meta description present."
+      },
+      {
+        "metric": "wordCount",
+        "value": 1082,
+        "severity": "Ok",
+        "rationale": "Sufficient content depth."
+      }
+    ]
+  },
+  "rawOutput": {
+    "insights": {
+      "seoStructure": {
+        "observation": "The page\u0027s SEO structure is significantly hampered by the presence of multiple H1 tags, which dilutes the primary topic signal for search engines. However, the meta title and description are well-optimized.",
+        "severity": "Warning",
+        "evidence": [
+          "The page features 5 H1 tags, while best practice dictates only one H1 for optimal SEO focus.",
+          "The metaTitle \u0027Welcome to Python.org\u0027 is clear and descriptive.",
+          "The metaDescription \u0027The official home of the Python Programming Language\u0027 is present and relevant."
+        ]
+      },
+      "messagingClarity": {
+        "observation": "The messaging on the page is highly clear and directly communicates the value and purpose of Python, supported by relevant content and a well-defined meta title and description.",
+        "severity": "Ok",
+        "evidence": [
+          "The metaTitle \u0027Welcome to Python.org\u0027 clearly states the page\u0027s identity.",
+          "The metaDescription \u0027The official home of the Python Programming Language\u0027 accurately summarizes the content.",
+          "The body content and headings effectively explain Python\u0027s features and benefits, ensuring clear communication."
+        ]
+      },
+      "ctaUsage": {
+        "observation": "The page incorporates a substantial number of calls-to-action, suggesting a strong push for user engagement and various conversion pathways. This could be beneficial for a highly interactive page, but warrants review to ensure clarity over quantity.",
+        "severity": "Minor",
+        "evidence": [
+          "The page contains 11 distinct CTAs."
+        ]
+      },
+      "contentDepth": {
+        "observation": "The page demonstrates excellent content depth and a solid hierarchical structure, providing substantial value to users and strong signals to search engines regarding topical authority. The generous use of H2s effectively breaks down the content.",
+        "severity": "Ok",
+        "evidence": [
+          "The page has a wordCount of 1082, indicating comprehensive content.",
+          "There are 9 H2 tags, providing good content segmentation.",
+          "The page contains 0 H3 tags, suggesting opportunities for even finer content granularity."
+        ]
+      },
+      "uxStructural": {
+        "observation": "The page offers strong foundational UX elements regarding image accessibility. However, the high volume of internal and external links, coupled with multiple H1s, could potentially overwhelm users and detract from a clear content hierarchy.",
+        "severity": "Warning",
+        "evidence": [
+          "All 1 image present has alt text, resulting in 0% of images missing alt text.",
+          "The page contains 133 internal links and 79 external links, which is a very high number.",
+          "There are 5 H1 tags, which can disrupt the visual and semantic hierarchy for users."
+        ]
+      }
+    },
+    "recommendations": [
+      {
+        "priority": "High",
+        "title": "Consolidate H1 Tags for SEO \u0026 UX Clarity",
+        "action": "Restructure the page content to ensure only one H1 tag is present, accurately reflecting the page\u0027s primary topic. Convert the other 4 current H1 tags into H2s or H3s, as appropriate, to maintain a logical content hierarchy.",
+        "reasoning": "Having 5 H1 tags significantly dilutes the page\u0027s SEO focus, making it difficult for search engines to ascertain the main subject. This also creates a poor user experience by lacking a clear visual and semantic hierarchy. Reducing the h1Count to 1 will improve both SEO performance and content scannability.",
+        "relatedMetrics": [
+          "h1Count"
+        ]
+      },
+      {
+        "priority": "Medium",
+        "title": "Optimize Internal and External Linking Strategy",
+        "action": "Conduct a thorough audit of the 133 internal links and 79 external links. Prioritize and consolidate links where possible, ensuring each link serves a clear purpose and adds value. Consider using contextual links over excessive navigation links.",
+        "reasoning": "While linking is vital for SEO and user navigation, an unusually high volume of internalLinks (133) and externalLinks (79) on a single page can dilute \u0027link equity\u0027 and overwhelm users, potentially impacting the page\u0027s perceived authority and user experience.",
+        "relatedMetrics": [
+          "internalLinks",
+          "externalLinks"
+        ]
+      },
+      {
+        "priority": "Medium",
+        "title": "Refine Call-to-Action Placement and Messaging",
+        "action": "Analyze the purpose and effectiveness of each of the 11 CTAs. Identify the primary conversion goals for the page and ensure those CTAs are most prominent. Experiment with grouping related CTAs or reducing less critical ones to streamline user decision-making.",
+        "reasoning": "With 11 CTAs, there\u0027s a risk of \u0027choice paralysis\u0027 or diluting the impact of key conversion drivers. Optimizing the ctaCount, placement, and messaging will help guide users more effectively towards desired actions, improving conversion rates.",
+        "relatedMetrics": [
+          "ctaCount"
+        ]
+      },
+      {
+        "priority": "Low",
+        "title": "Enhance Content Hierarchy with H3 Tags",
+        "action": "Review sections under the 9 H2 tags and introduce H3 tags where logical to further break down sub-topics. This will create a more detailed content outline and improve readability for the 1082-word page.",
+        "reasoning": "While the page has good content depth and H2 segmentation, the absence of h3Count (0) means there\u0027s an opportunity to create even finer content granularity. This enhances scannability for users and provides more structural signals to search engines for deeper topic understanding.",
+        "relatedMetrics": [
+          "h2Count",
+          "h3Count",
+          "wordCount"
+        ]
+      }
+    ]
+  }
+}

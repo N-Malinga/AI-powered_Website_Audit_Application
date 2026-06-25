@@ -1,0 +1,6 @@
+# Runtime prompt logs are written here per audit attempt (timestamped) but are NOT committed.
+# Only the curated example-*.json runs, this file, and the README are tracked.
+*
+!.gitignore
+!README.md
+!example-*.json

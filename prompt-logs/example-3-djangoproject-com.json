@@ -1,0 +1,122 @@
+{
+  "timestamp": "2026-06-25T10:19:43.8903139Z",
+  "systemPrompt": "You are a senior website auditor at a digital marketing agency that builds\nhigh-performing, SEO-focused marketing websites. You audit ONE web page.\n\nRules:\n- You are given FACTUAL METRICS already extracted from the page. Treat them as\n  ground truth. Never estimate, recompute, or invent a metric.\n- Every insight and every recommendation MUST cite specific metric values by name\n  and number (e.g. \u0022with 2 H1 tags\u0022 or \u002247% of images missing alt text\u0022).\n- Be specific to THIS page. Never give advice that would apply to any website.\n- Frame everything in agency terms: SEO, conversion, content clarity, UX.\n- If a metric shows no problem, say so briefly \u2014 do not manufacture an issue.\n- Output ONLY valid JSON matching the provided schema. No prose, no markdown.",
+  "userPrompt": "Audit this single web page.\n\nFACTUAL METRICS AND OBJECTIVE SEVERITY FLAGS (ground truth \u2014 the severity flags were\ndecided in code from fixed thresholds; explain and prioritize them, do not re-decide\nseverity):\n\n{\r\n  \u0022metrics\u0022: {\r\n    \u0022wordCount\u0022: 557,\r\n    \u0022h1Count\u0022: 1,\r\n    \u0022h2Count\u0022: 5,\r\n    \u0022h3Count\u0022: 14,\r\n    \u0022ctaCount\u0022: 13,\r\n    \u0022internalLinks\u0022: 40,\r\n    \u0022externalLinks\u0022: 31,\r\n    \u0022imageCount\u0022: 1,\r\n    \u0022imagesMissingAltCount\u0022: 0,\r\n    \u0022imagesMissingAltPercent\u0022: 0,\r\n    \u0022metaTitle\u0022: \u0022The web framework for perfectionists with deadlines | Django\u0022,\r\n    \u0022metaDescription\u0022: null\r\n  },\r\n  \u0022severityFlags\u0022: [\r\n    {\r\n      \u0022metric\u0022: \u0022h1Count\u0022,\r\n      \u0022value\u0022: 1,\r\n      \u0022severity\u0022: \u0022Ok\u0022,\r\n      \u0022rationale\u0022: \u0022Exactly one H1 \\u2014 good SEO structure.\u0022\r\n    },\r\n    {\r\n      \u0022metric\u0022: \u0022imagesMissingAltPercent\u0022,\r\n      \u0022value\u0022: 0,\r\n      \u0022severity\u0022: \u0022Ok\u0022,\r\n      \u0022rationale\u0022: \u0022Most images have alt text.\u0022\r\n    },\r\n    {\r\n      \u0022metric\u0022: \u0022metaDescription\u0022,\r\n      \u0022value\u0022: \u0022absent\u0022,\r\n      \u0022severity\u0022: \u0022Warning\u0022,\r\n      \u0022rationale\u0022: \u0022No meta description; search engines lack a controlled snippet.\u0022\r\n    },\r\n    {\r\n      \u0022metric\u0022: \u0022wordCount\u0022,\r\n      \u0022value\u0022: 557,\r\n      \u0022severity\u0022: \u0022Ok\u0022,\r\n      \u0022rationale\u0022: \u0022Sufficient content depth.\u0022\r\n    }\r\n  ]\r\n}\n\nTRIMMED PAGE CONTENT (headings in document order, then the first 600 words\nof body text):\n\nHEADINGS:\r\nH2: Django Developer Survey\nH1: Meet Django\nH2: Join the Community\nH3: Forum - Post a question\nH3: Discord - Chat with us\nH2: Additional Information\nH2: Additional Information\nH3: Support Django!\nH3: Latest news\nH4: Django 6.1 beta 1 released\nH4: Announcing the Search for a DSF Executive Director\nH3: New to Django?\nH3: The power of Django\nH3: Get involved\nH3: Get Help\nH3: The Django Software Foundation\nH2: Django Links\nH3: Learn More\nH3: Get Involved\nH3: Get Help\nH3: Follow Us\nH3: Support Us\r\n\r\nBODY (first 600 words):\r\nSkip to main content Django The web framework for perfectionists with deadlines. Menu Main navigation Overview Download Documentation News Code Issues Community Foundation \u2665 Donate Search Submit Toggle theme (current theme: auto) Toggle theme (current theme: light) Toggle theme (current theme: dark) Toggle Light / Dark / Auto color theme Django makes it easier to build better web apps more quickly and with less code. Get started with Django Django Developer Survey The Django Software Foundation is once again partnering with JetBrains to run the 2026 Django Developer Survey \uD83D\uDCCA Help us better understand how Django is being used around the world and guide future technical and community decisions. Read more on the Django blog . Take the survey \u2728 Meet Django Django is a high-level Python web framework that encourages rapid development and clean, pragmatic design. Built by experienced developers, it takes care of much of the hassle of web development, so you can focus on writing your app without needing to reinvent the wheel. It\u2019s free and open source. Ridiculously fast. Django was designed to help developers take applications from concept to completion as quickly as possible. Reassuringly secure. Django takes security seriously and helps developers avoid many common security mistakes. Exceedingly scalable. Some of the busiest sites on the web leverage Django\u2019s ability to quickly and flexibly scale. Learn more about Django Join the Community Forum - Post a question Discord - Chat with us Back to Top Additional Information Additional Information Download latest release: 6.0.6 Django documentation Support Django! Mohit Khandelwal donated to the Django Software Foundation to support Django development. Donate today! Latest news Django 6.1 beta 1 released Today Django 6.1 beta 1, a preview/testing package for the upcoming Django 6.1 release, is available. Posted by Jacob Walls on June 24, 2026 Announcing the Search for a DSF Executive Director The Django Software Foundation is hiring its first Executive Director, made possible by a $47,500 first-year pledge from six Django agencies. It\u0027s a turning point for the foundation, and we\u0027re asking the rest of the community to help us fund the role. Posted by Jeff Triplett on June 17, 2026 More news New to Django? Installation guide Write your first Django app Getting started with Django The power of Django Object-relational mapper Automatic admin interface Robust template system Quick internationalization Explore more features Get involved Ticket system Report bugs and make feature requests Development dashboard see what\u0027s currently being worked on Inside the Django community Get Help Django Discord Server Join the Django Discord Community Official Django Forum Join the community on the Django Forum. The Django Software Foundation About the Foundation Our non-profit supports the project Support Django Your contribution makes Django stronger Contact the Django Software Foundation More about the DSF Django Links Learn More About Django Getting Started with Django Team Organization Django Software Foundation Code of Conduct Diversity Statement Get Involved Join a Group Contribute to Django Submit a Bug Report a Security Issue Individual membership Get Help Getting Help FAQ Django Discord Official Django Forum Follow Us GitHub X Fediverse (Mastodon) Bluesky LinkedIn News RSS Support Us Sponsor Django Corporate membership Official merchandise store Benevity Workplace Giving Program Django Hosting by In-kind donors Design by Threespot \u0026 andrevv \u00A9 2005-2026 Django Software Foundation and individual contributors. Django is a registered trademark of the Django Software Foundation.\n\nReturn ONLY JSON matching the schema: an \u0022insights\u0022 object with one entry per category\n(seoStructure, messagingClarity, ctaUsage, contentDepth, uxStructural) and a\n\u0022recommendations\u0022 array of 3 to 5 items.",
+  "structuredInput": {
+    "metrics": {
+      "wordCount": 557,
+      "h1Count": 1,
+      "h2Count": 5,
+      "h3Count": 14,
+      "ctaCount": 13,
+      "internalLinks": 40,
+      "externalLinks": 31,
+      "imageCount": 1,
+      "imagesMissingAltCount": 0,
+      "imagesMissingAltPercent": 0,
+      "metaTitle": "The web framework for perfectionists with deadlines | Django",
+      "metaDescription": null
+    },
+    "severityFlags": [
+      {
+        "metric": "h1Count",
+        "value": 1,
+        "severity": "Ok",
+        "rationale": "Exactly one H1 \u2014 good SEO structure."
+      },
+      {
+        "metric": "imagesMissingAltPercent",
+        "value": 0,
+        "severity": "Ok",
+        "rationale": "Most images have alt text."
+      },
+      {
+        "metric": "metaDescription",
+        "value": "absent",
+        "severity": "Warning",
+        "rationale": "No meta description; search engines lack a controlled snippet."
+      },
+      {
+        "metric": "wordCount",
+        "value": 557,
+        "severity": "Ok",
+        "rationale": "Sufficient content depth."
+      }
+    ]
+  },
+  "rawOutput": {
+    "insights": {
+      "seoStructure": {
+        "observation": "The page exhibits a well-defined main heading with 1 H1 tag and excellent image accessibility with 0% of images missing alt text. However, a critical SEO element, the meta description, is absent.",
+        "severity": "Warning",
+        "evidence": [
+          "h1Count: 1",
+          "imagesMissingAltPercent: 0",
+          "metaDescription: null"
+        ]
+      },
+      "messagingClarity": {
+        "observation": "The meta title \u0027The web framework for perfectionists with deadlines | Django\u0027 is clear and informative. However, the presence of duplicate \u0027Additional Information\u0027 H2 tags within the total of 5 H2 tags could lead to user confusion regarding content segmentation and topic hierarchy.",
+        "severity": "Warning",
+        "evidence": [
+          "metaTitle: \u0022The web framework for perfectionists with deadlines | Django\u0022",
+          "h2Count: 5"
+        ]
+      },
+      "ctaUsage": {
+        "observation": "The page features 13 calls to action, which can offer multiple engagement points. While not flagged as an issue, this number warrants a strategic review to ensure clarity and optimal conversion pathways.",
+        "severity": "Ok",
+        "evidence": [
+          "ctaCount: 13"
+        ]
+      },
+      "contentDepth": {
+        "observation": "The page provides sufficient content depth with a word count of 557, indicating comprehensive coverage of its topic.",
+        "severity": "Ok",
+        "evidence": [
+          "wordCount: 557"
+        ]
+      },
+      "uxStructural": {
+        "observation": "The page benefits from good content segmentation through its 1 H1 tag, 5 H2 tags, and 14 H3 tags, alongside full image alt text coverage with 0% of images missing alt text, contributing to accessibility. However, the placement of an H2 (\u0027Django Developer Survey\u0027) before the main H1 (\u0027Meet Django\u0027) and the duplicate \u0027Additional Information\u0027 H2 tags detract from an optimal user experience and logical flow.",
+        "severity": "Warning",
+        "evidence": [
+          "h1Count: 1",
+          "h2Count: 5",
+          "h3Count: 14",
+          "imagesMissingAltPercent: 0"
+        ]
+      }
+    },
+    "recommendations": [
+      {
+        "priority": "High",
+        "title": "Implement a Meta Description",
+        "action": "Create a compelling and keyword-rich meta description for this page that accurately summarizes its content. This will allow search engines to display a controlled snippet in search results.",
+        "reasoning": "A missing meta description (\u0060metaDescription: null\u0060) is a critical SEO oversight. Search engines will generate one, but it may not be optimized for click-through rates, potentially impacting organic traffic and user acquisition.",
+        "relatedMetrics": [
+          "metaDescription: null"
+        ]
+      },
+      {
+        "priority": "Medium",
+        "title": "Resolve Heading Structure Inconsistencies",
+        "action": "Review the 5 H2 tags and consolidate or rephrase the two H2 tags titled \u0027Additional Information\u0027 to ensure each heading is unique and accurately represents distinct content sections. Additionally, reorder the \u0027Django Developer Survey\u0027 H2 to appear after the main H1 to establish a clear content hierarchy.",
+        "reasoning": "Duplicate H2 tags can confuse both users and search engines, hindering content clarity and SEO indexing. Placing content under an H2 before the main H1 (\u0060h1Count: 1\u0060) creates an illogical content hierarchy, impacting user experience and semantic understanding.",
+        "relatedMetrics": [
+          "h2Count: 5",
+          "h1Count: 1"
+        ]
+      },
+      {
+        "priority": "Medium",
+        "title": "Optimize Call-to-Action Strategy",
+        "action": "Evaluate the purpose and placement of the 13 calls to action on the page. Consolidate redundant CTAs and ensure the most important conversion-driving actions are prominently featured and distinct to guide user behavior effectively.",
+        "reasoning": "While 13 calls to action (\u0060ctaCount: 13\u0060) can offer multiple engagement points, a high number can also dilute the focus on primary conversion goals, potentially overwhelming users and reducing overall conversion rates.",
+        "relatedMetrics": [
+          "ctaCount: 13"
+        ]
+      }
+    ]
+  }
+}

@@ -75,6 +75,14 @@ analysis in separate layers with separate interfaces.
   reads `VITE_API_URL` (`.env`; fallback `http://localhost:5171`) and normalizes RFC7807 errors.
 - `src/lib/format.ts`: category labels/order, priority sort rank, severity/priority badge colors.
 
+## Prompt logging (PromptLogger)
+- Each audit attempt is captured to `AuditResult.promptLog` (shown in the frontend trace panel)
+  AND appended as a timestamped JSON record to `prompt-logs/` at the repo root: `timestamp`,
+  verbatim `systemPrompt`, constructed `userPrompt`, `structuredInput` (PageMetrics + severity
+  flags), and `rawOutput` (raw model output before deserialization).
+- `GEMINI_API_KEY` is redacted as a safety net; logging never throws. Output dir overridable via
+  `PromptLogs:Directory`. Runtime records are git-ignored; only curated `example-*.json` are committed.
+
 ## Conventions
 - C# records for DTOs. Nullable enabled. async everywhere.
 - No secrets in code. `GEMINI_API_KEY` from config/env (read via IConfiguration).

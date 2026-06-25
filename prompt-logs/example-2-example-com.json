@@ -1,0 +1,146 @@
+{
+  "timestamp": "2026-06-25T10:18:15.8096178Z",
+  "systemPrompt": "You are a senior website auditor at a digital marketing agency that builds\nhigh-performing, SEO-focused marketing websites. You audit ONE web page.\n\nRules:\n- You are given FACTUAL METRICS already extracted from the page. Treat them as\n  ground truth. Never estimate, recompute, or invent a metric.\n- Every insight and every recommendation MUST cite specific metric values by name\n  and number (e.g. \u0022with 2 H1 tags\u0022 or \u002247% of images missing alt text\u0022).\n- Be specific to THIS page. Never give advice that would apply to any website.\n- Frame everything in agency terms: SEO, conversion, content clarity, UX.\n- If a metric shows no problem, say so briefly \u2014 do not manufacture an issue.\n- Output ONLY valid JSON matching the provided schema. No prose, no markdown.",
+  "userPrompt": "Audit this single web page.\n\nFACTUAL METRICS AND OBJECTIVE SEVERITY FLAGS (ground truth \u2014 the severity flags were\ndecided in code from fixed thresholds; explain and prioritize them, do not re-decide\nseverity):\n\n{\r\n  \u0022metrics\u0022: {\r\n    \u0022wordCount\u0022: 19,\r\n    \u0022h1Count\u0022: 1,\r\n    \u0022h2Count\u0022: 0,\r\n    \u0022h3Count\u0022: 0,\r\n    \u0022ctaCount\u0022: 1,\r\n    \u0022internalLinks\u0022: 0,\r\n    \u0022externalLinks\u0022: 1,\r\n    \u0022imageCount\u0022: 0,\r\n    \u0022imagesMissingAltCount\u0022: 0,\r\n    \u0022imagesMissingAltPercent\u0022: 0,\r\n    \u0022metaTitle\u0022: \u0022Example Domain\u0022,\r\n    \u0022metaDescription\u0022: null\r\n  },\r\n  \u0022severityFlags\u0022: [\r\n    {\r\n      \u0022metric\u0022: \u0022h1Count\u0022,\r\n      \u0022value\u0022: 1,\r\n      \u0022severity\u0022: \u0022Ok\u0022,\r\n      \u0022rationale\u0022: \u0022Exactly one H1 \\u2014 good SEO structure.\u0022\r\n    },\r\n    {\r\n      \u0022metric\u0022: \u0022imagesMissingAltPercent\u0022,\r\n      \u0022value\u0022: 0,\r\n      \u0022severity\u0022: \u0022Ok\u0022,\r\n      \u0022rationale\u0022: \u0022Most images have alt text.\u0022\r\n    },\r\n    {\r\n      \u0022metric\u0022: \u0022metaDescription\u0022,\r\n      \u0022value\u0022: \u0022absent\u0022,\r\n      \u0022severity\u0022: \u0022Warning\u0022,\r\n      \u0022rationale\u0022: \u0022No meta description; search engines lack a controlled snippet.\u0022\r\n    },\r\n    {\r\n      \u0022metric\u0022: \u0022wordCount\u0022,\r\n      \u0022value\u0022: 19,\r\n      \u0022severity\u0022: \u0022Minor\u0022,\r\n      \u0022rationale\u0022: \u0022Thin content (under 300 words) may limit ranking potential.\u0022\r\n    }\r\n  ]\r\n}\n\nTRIMMED PAGE CONTENT (headings in document order, then the first 600 words\nof body text):\n\nHEADINGS:\r\nH1: Example Domain\r\n\r\nBODY (first 600 words):\r\nExample Domain This domain is for use in documentation examples without needing permission. Avoid use in operations. Learn more\n\nReturn ONLY JSON matching the schema: an \u0022insights\u0022 object with one entry per category\n(seoStructure, messagingClarity, ctaUsage, contentDepth, uxStructural) and a\n\u0022recommendations\u0022 array of 3 to 5 items.",
+  "structuredInput": {
+    "metrics": {
+      "wordCount": 19,
+      "h1Count": 1,
+      "h2Count": 0,
+      "h3Count": 0,
+      "ctaCount": 1,
+      "internalLinks": 0,
+      "externalLinks": 1,
+      "imageCount": 0,
+      "imagesMissingAltCount": 0,
+      "imagesMissingAltPercent": 0,
+      "metaTitle": "Example Domain",
+      "metaDescription": null
+    },
+    "severityFlags": [
+      {
+        "metric": "h1Count",
+        "value": 1,
+        "severity": "Ok",
+        "rationale": "Exactly one H1 \u2014 good SEO structure."
+      },
+      {
+        "metric": "imagesMissingAltPercent",
+        "value": 0,
+        "severity": "Ok",
+        "rationale": "Most images have alt text."
+      },
+      {
+        "metric": "metaDescription",
+        "value": "absent",
+        "severity": "Warning",
+        "rationale": "No meta description; search engines lack a controlled snippet."
+      },
+      {
+        "metric": "wordCount",
+        "value": 19,
+        "severity": "Minor",
+        "rationale": "Thin content (under 300 words) may limit ranking potential."
+      }
+    ]
+  },
+  "rawOutput": {
+    "insights": {
+      "seoStructure": {
+        "observation": "The page has a correctly implemented H1 tag with 1 H1 and no images missing alt text (0% missing), which is positive for basic SEO. However, it critically lacks a meta description (null) and internal links (0 internal links), significantly hindering its overall SEO visibility and crawlability.",
+        "severity": "Warning",
+        "evidence": [
+          "h1Count: 1",
+          "imagesMissingAltPercent: 0",
+          "metaDescription: null",
+          "internalLinks: 0"
+        ]
+      },
+      "messagingClarity": {
+        "observation": "The page content is extremely sparse with only 19 words, leading to very low messaging clarity and an inability to convey a comprehensive value proposition or detailed information to the user.",
+        "severity": "Critical",
+        "evidence": [
+          "wordCount: 19"
+        ]
+      },
+      "ctaUsage": {
+        "observation": "The page contains a single CTA (1 CTA), which is likely insufficient and lacks proper contextual support given the extremely low content depth (19 words) to adequately inform or motivate users towards conversion.",
+        "severity": "Warning",
+        "evidence": [
+          "ctaCount: 1",
+          "wordCount: 19"
+        ]
+      },
+      "contentDepth": {
+        "observation": "The page suffers from severe thin content, with only 19 words and no secondary headings (0 H2s and 0 H3s), which significantly limits its ability to rank for relevant keywords and provide in-depth value or authority to users.",
+        "severity": "Critical",
+        "evidence": [
+          "wordCount: 19",
+          "h2Count: 0",
+          "h3Count: 0"
+        ]
+      },
+      "uxStructural": {
+        "observation": "The page lacks any internal linking (0 internal links) and secondary headings (0 H2s, 0 H3s), impairing user navigation, content discoverability, and overall readability. The complete absence of images (0 images) also contributes to a visually unengaging user experience.",
+        "severity": "Warning",
+        "evidence": [
+          "internalLinks: 0",
+          "h2Count: 0",
+          "h3Count: 0",
+          "imageCount: 0"
+        ]
+      }
+    },
+    "recommendations": [
+      {
+        "priority": "High",
+        "title": "Enhance Content Depth and Value",
+        "action": "Significantly expand the page\u0027s word count beyond 19 words to provide comprehensive, high-quality information relevant to \u0027Example Domain.\u0027 Structure this content with clear sections and paragraphs.",
+        "reasoning": "Thin content with only 19 words critically impacts SEO ranking potential due to Google\u0027s quality guidelines and severely limits user engagement by failing to provide meaningful value or context. Expanding content will improve relevance and authority.",
+        "relatedMetrics": [
+          "wordCount: 19",
+          "h2Count: 0",
+          "h3Count: 0"
+        ]
+      },
+      {
+        "priority": "High",
+        "title": "Create a Compelling Meta Description",
+        "action": "Implement a unique, keyword-rich, and descriptive meta description for the page that accurately summarizes its content and entices users to click from search results.",
+        "reasoning": "A missing meta description (null) forces search engines to generate a snippet, which may not be optimized for click-through rates (CTR) or accurately reflect the page\u0027s purpose, thereby reducing organic visibility and traffic.",
+        "relatedMetrics": [
+          "metaDescription: null"
+        ]
+      },
+      {
+        "priority": "High",
+        "title": "Integrate Internal Links for SEO and UX",
+        "action": "Add relevant internal links within the expanded content, directing users and search engine crawlers to other important pages on your website.",
+        "reasoning": "The complete absence of internal links (0 internal links) hinders both user navigation, preventing discovery of related content, and the distribution of link equity across the site, which is crucial for overall SEO performance and crawlability.",
+        "relatedMetrics": [
+          "internalLinks: 0"
+        ]
+      },
+      {
+        "priority": "Medium",
+        "title": "Utilize Secondary Headings for Readability",
+        "action": "Introduce H2 and H3 headings to logically segment the expanded content, making it easier for users to scan and for search engines to understand the page\u0027s hierarchical structure and key topics.",
+        "reasoning": "With 0 H2 and 0 H3 tags, the content lacks structure, making it difficult for users to consume information efficiently and for search engines to properly index and rank the page for various subtopics, impacting both UX and SEO.",
+        "relatedMetrics": [
+          "h2Count: 0",
+          "h3Count: 0"
+        ]
+      },
+      {
+        "priority": "Medium",
+        "title": "Optimize Call-to-Action Effectiveness",
+        "action": "Re-evaluate the placement and wording of the single CTA, ensuring it is supported by sufficient surrounding content that educates and motivates the user to take the desired action.",
+        "reasoning": "A single CTA (1 CTA) with only 19 words of content provides minimal opportunity for users to understand its purpose or be persuaded to convert, severely limiting the page\u0027s conversion potential. Enhanced context is crucial for improved performance.",
+        "relatedMetrics": [
+          "ctaCount: 1",
+          "wordCount: 19"
+        ]
+      }
+    ]
+  }
+}
