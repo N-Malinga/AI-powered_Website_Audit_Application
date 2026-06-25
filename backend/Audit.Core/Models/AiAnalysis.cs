@@ -1,7 +1,10 @@
 namespace Audit.Core.Models;
 
 /// <summary>
-/// The AI layer's output: grounded insights plus recommendations, interpreting the metrics.
-/// Fields are added in the AI-analysis phase.
+/// The AI layer's output: grounded insights and recommendations interpreting the metrics,
+/// plus the <see cref="PromptLog"/> for the exchange that produced them.
 /// </summary>
-public record AiAnalysis;
+public sealed record AiAnalysis(
+    IReadOnlyList<Insight> Insights,
+    IReadOnlyList<Recommendation> Recommendations,
+    PromptLog? PromptLog);
