@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: website-audit-api
+    runtime: docker
+    plan: free
+    region: oregon
+    # Build context is backend/ so the Dockerfile's COPY paths resolve.
+    dockerContext: ./backend
+    dockerfilePath: ./backend/Dockerfile
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      # Set the actual key in the Render dashboard (sync:false keeps it out of git).
+      - key: GEMINI_API_KEY
+        sync: false
+      # Comma-separated allow-list for CORS. Set to your Vercel domain, e.g.
+      # https://your-app.vercel.app  (no trailing slash).
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false

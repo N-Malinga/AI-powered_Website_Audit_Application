@@ -1,0 +1,16 @@
+# Build artifacts
+**/bin/
+**/obj/
+**/out/
+
+# IDE / OS
+.vs/
+.vscode/
+*.user
+
+# Runtime prompt logs (only curated example-*.json are committed)
+../prompt-logs/
+
+# Git
+.git/
+.gitignore
