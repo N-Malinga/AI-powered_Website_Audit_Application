@@ -2,9 +2,10 @@ namespace Audit.Core.Models;
 
 /// <summary>
 /// The AI layer's output: grounded insights and recommendations interpreting the metrics,
-/// plus the <see cref="PromptLog"/> for the exchange that produced them.
+/// the <see cref="PromptLog"/> for the exchange that produced them, and the grounding-guard result.
 /// </summary>
 public sealed record AiAnalysis(
     IReadOnlyList<Insight> Insights,
     IReadOnlyList<Recommendation> Recommendations,
-    PromptLog? PromptLog);
+    PromptLog? PromptLog,
+    GroundingResult Grounding);

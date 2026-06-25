@@ -33,6 +33,11 @@ public sealed class AuditWebsiteCommandHandler : IRequestHandler<AuditWebsiteCom
         // Trimming of content for the prompt is added in the AI phase; pass raw HTML for now.
         var analysis = await _aiAnalyzer.AnalyzeAsync(metrics, html, cancellationToken);
 
-        return new AuditResult(metrics, analysis.Insights, analysis.Recommendations, analysis.PromptLog);
+        return new AuditResult(
+            metrics,
+            analysis.Insights,
+            analysis.Recommendations,
+            analysis.PromptLog,
+            analysis.Grounding);
     }
 }

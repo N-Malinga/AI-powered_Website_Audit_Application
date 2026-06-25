@@ -23,7 +23,13 @@ public static class DependencyInjection
         });
 
         services.AddScoped<IMetricsExtractor, AngleSharpMetricsExtractor>();
-        services.AddScoped<IAiAnalyzer, GeminiAiAnalyzer>();
+
+        services.AddHttpClient<IAiAnalyzer, GeminiAiAnalyzer>(client =>
+        {
+            client.BaseAddress = new Uri("https://generativelanguage.googleapis.com/");
+            client.Timeout = TimeSpan.FromSeconds(60);
+        });
+
         services.AddSingleton<IPromptLogger, PromptLogger>();
         return services;
     }

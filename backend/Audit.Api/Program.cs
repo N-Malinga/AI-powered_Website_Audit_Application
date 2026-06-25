@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Audit.Api;
 using Audit.Core;
 using Audit.Core.Application;
@@ -7,6 +8,10 @@ using MediatR;
 var builder = WebApplication.CreateBuilder(args);
 
 const string DevCorsPolicy = "dev";
+
+// Serialize enums (Severity, Priority) as strings so the response is self-descriptive.
+builder.Services.ConfigureHttpJsonOptions(options =>
+    options.SerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
 // Permissive CORS for local frontend development. Tightened in a later phase.
 builder.Services.AddCors(options =>
