@@ -8,7 +8,7 @@ marketing-agency audience.
 The defining constraint: **metrics are computed in code and treated as ground truth.
 The LLM never computes or estimates a number — it only explains the ones we give it.**
 
-**Live demo:** _<add deployed URL here>_ (frontend on Vercel, API on Render — free tier,
+**Live demo:** _<https://website-audit-app-coral.vercel.app/>_ (frontend on Vercel, API on Render — free tier,
 so the first request after idle may take ~1 min to wake; see [cold start](#trade-offs)).
 
 ## Local setup
