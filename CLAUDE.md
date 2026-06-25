@@ -14,6 +14,9 @@ analysis in separate layers with separate interfaces.
 - Projects: `Audit.Core`, `Audit.Infrastructure`, `Audit.Api`, `Audit.Tests`.
   References: Api → Infrastructure → Core; Tests → all three.
 - `frontend/` — React + Vite + TypeScript single-page UI (see Frontend section).
+- `README.md` (repo root) — public-facing overview (what it does, setup, architecture, AI design
+  decisions, trade-offs). `render.yaml` — Render free-tier Docker deploy (API; CORS via
+  `CORS_ALLOWED_ORIGINS`). Frontend deploys to Vercel.
 
 ## Backend architecture (ASP.NET Core)
 - **Core**: domain models, interfaces, MediatR command + handler, FluentValidation,
@@ -64,11 +67,19 @@ analysis in separate layers with separate interfaces.
 
 ## Frontend (frontend/ — React 19 + Vite 8 + TypeScript)
 - Styling: **Tailwind v4** via `@tailwindcss/vite` (no PostCSS config); theme tokens + base in
-  `src/index.css`. Clean, professional, agency-oriented look.
-- Single screen (`src/App.tsx`): URL input + Audit button → three separated sections
-  (Factual Metrics stat grid, AI Insights by the 5 categories with severity badges,
-  Recommendations sorted High→Low with priority badges + reasoning) + a collapsible
-  "View reasoning trace" panel rendering the prompt log and grounding summary.
+  `src/index.css`. "PageLens AI" branding; clean, professional, agency-oriented look.
+- `src/App.tsx` is a thin shell: state machine + which view to show. Both views render in the
+  same centered card width (`mx-auto w-full max-w-4xl px-4 sm:px-6`); the entry view adds soft
+  side-gutter brand gradients on wide screens.
+- Two views:
+  - **EntryScreen** (`components/EntryScreen.tsx`, wraps `AuditForm` + `LoadingState` +
+    `ErrorBanner` + `Logo`): URL input + Audit button, escalating loading copy, error banner.
+  - **ReportView** (`components/ReportView.tsx`): gradient hero (target URL + page-title headline
+    + Export(`window.print()`)/New-audit buttons), a floating **grounding** card with a
+    conic-gradient donut showing `distinctMetricsReferenced/required` (not a mock 0–100 score),
+    then the three separated sections — `MetricsTable`, `InsightsList` (5 categories, severity
+    badges), `RecommendationsList` (sorted High→Low, priority badges + reasoning) — and a
+    collapsible `ReasoningTrace` panel rendering the prompt log + grounding summary.
 - State machine `idle | pending | success | error`. **Warms the backend on load** via
   `pingHealth()`; loading message escalates to "Warming up the backend…" after 4s (Render cold start).
 - `src/types.ts` mirrors the `AuditResult` JSON. `src/api/client.ts` (`auditWebsite`, `pingHealth`)
