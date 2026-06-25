@@ -1,13 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { auditWebsite, pingHealth } from "./api/client";
 import type { AuditResult } from "./types";
-import AuditForm from "./components/AuditForm";
-import LoadingState from "./components/LoadingState";
-import ErrorBanner from "./components/ErrorBanner";
-import MetricsGrid from "./components/MetricsGrid";
-import InsightsSection from "./components/InsightsSection";
-import RecommendationsSection from "./components/RecommendationsSection";
-import ReasoningTrace from "./components/ReasoningTrace";
+import EntryScreen from "./components/EntryScreen";
+import ReportView from "./components/ReportView";
 
 type Status = "idle" | "pending" | "success" | "error";
 
@@ -16,6 +11,7 @@ const COLD_START_MS = 4000;
 export default function App() {
   const [status, setStatus] = useState<Status>("idle");
   const [result, setResult] = useState<AuditResult | null>(null);
+  const [auditedUrl, setAuditedUrl] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [coldStart, setColdStart] = useState(false);
   const coldStartTimer = useRef<number | undefined>(undefined);
@@ -30,6 +26,7 @@ export default function App() {
     setStatus("pending");
     setErrorMessage("");
     setColdStart(false);
+    setAuditedUrl(url);
     coldStartTimer.current = window.setTimeout(() => setColdStart(true), COLD_START_MS);
 
     try {
@@ -44,42 +41,51 @@ export default function App() {
     }
   }
 
-  const pending = status === "pending";
+  function reset() {
+    setStatus("idle");
+    setResult(null);
+    setErrorMessage("");
+  }
+
+  const showReport = status === "success" && result;
 
   return (
-    <div className="mx-auto flex min-h-screen w-full max-w-5xl flex-col px-4 py-8 sm:px-6">
-      <header className="mb-6">
-        <h1 className="text-2xl font-bold tracking-tight text-slate-900">Website Audit</h1>
-        <p className="mt-1 text-sm text-slate-500">
-          Enter a page URL to get factual metrics plus grounded, agency-grade insights and
-          recommendations.
-        </p>
-      </header>
-
-      <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <AuditForm onSubmit={runAudit} pending={pending} />
-      </div>
-
-      <main className="mt-6 flex flex-col gap-8">
-        {pending ? <LoadingState coldStart={coldStart} /> : null}
-
-        {status === "error" ? <ErrorBanner message={errorMessage} /> : null}
-
-        {status === "success" && result ? (
-          <>
-            <MetricsGrid metrics={result.metrics} />
-            <InsightsSection insights={result.insights} />
-            <RecommendationsSection recommendations={result.recommendations} />
-            <ReasoningTrace promptLog={result.promptLog} grounding={result.grounding} />
-          </>
-        ) : null}
-
-        {status === "idle" ? (
-          <p className="rounded-xl border border-dashed border-slate-200 p-8 text-center text-sm text-slate-400">
-            Results will appear here after you run an audit.
-          </p>
-        ) : null}
-      </main>
+    <div className="min-h-screen w-full py-6 sm:py-8">
+      {showReport ? (
+        // Report uses the same centered, max-w-4xl card width as the entry screen.
+        <div className="mx-auto w-full max-w-4xl px-4 sm:px-6">
+          <ReportView result={result} url={auditedUrl} onReset={reset} />
+        </div>
+      ) : (
+        // Entry screen stays centered and narrow; soft brand gradients fill the
+        // empty side gutters on wider screens so the page doesn't feel bare.
+        <div className="relative">
+          <div
+            aria-hidden
+            className="pointer-events-none fixed inset-y-0 left-0 hidden w-[30vw] lg:block"
+            style={{
+              background:
+                "radial-gradient(38rem 38rem at 0% 50%, rgba(124,58,237,0.10), transparent 70%)",
+            }}
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none fixed inset-y-0 right-0 hidden w-[30vw] lg:block"
+            style={{
+              background:
+                "radial-gradient(38rem 38rem at 100% 50%, rgba(6,182,212,0.10), transparent 70%)",
+            }}
+          />
+          <div className="relative mx-auto w-full max-w-4xl px-4 sm:px-6">
+            <EntryScreen
+              onSubmit={runAudit}
+              status={status === "success" ? "idle" : status}
+              errorMessage={errorMessage}
+              coldStart={coldStart}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

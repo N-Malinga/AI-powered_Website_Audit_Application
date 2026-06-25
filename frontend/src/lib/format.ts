@@ -1,15 +1,25 @@
 import type { Priority, Severity } from "../types";
 
-/** The five insight categories, in the order we render them, with display labels. */
-export const INSIGHT_CATEGORY_ORDER: { key: string; label: string }[] = [
-  { key: "seoStructure", label: "SEO Structure" },
-  { key: "messagingClarity", label: "Messaging Clarity" },
-  { key: "ctaUsage", label: "CTA Usage" },
-  { key: "contentDepth", label: "Content Depth" },
-  { key: "uxStructural", label: "UX & Structure" },
+/**
+ * The five insight categories, in render order. `label` is the human title;
+ * `slug` is the snake_case form used by the data-forward / terminal report.
+ */
+export const INSIGHT_CATEGORY_ORDER: { key: string; label: string; slug: string }[] = [
+  { key: "seoStructure", label: "SEO Structure", slug: "seo_structure" },
+  { key: "messagingClarity", label: "Messaging Clarity", slug: "messaging_clarity" },
+  { key: "ctaUsage", label: "CTA Usage", slug: "cta_usage" },
+  { key: "contentDepth", label: "Content Depth", slug: "content_depth" },
+  { key: "uxStructural", label: "UX & Structure", slug: "ux_structural" },
 ];
 
-/** Fallback label for any unexpected category key (camelCase -> "Title Case"). */
+/** camelCase -> snake_case fallback for any unexpected category key. */
+export function categorySlug(key: string): string {
+  const known = INSIGHT_CATEGORY_ORDER.find((c) => c.key === key);
+  if (known) return known.slug;
+  return key.replace(/([A-Z])/g, "_$1").toLowerCase();
+}
+
+/** Human title for a category key (camelCase -> "Title Case" fallback). */
 export function categoryLabel(key: string): string {
   const known = INSIGHT_CATEGORY_ORDER.find((c) => c.key === key);
   if (known) return known.label;
@@ -26,17 +36,20 @@ export const PRIORITY_RANK: Record<Priority, number> = {
   Low: 2,
 };
 
-/** Tailwind classes for severity badges. */
-export const SEVERITY_BADGE: Record<Severity, string> = {
-  Critical: "bg-red-100 text-red-700 ring-red-600/20",
-  Warning: "bg-amber-100 text-amber-800 ring-amber-600/20",
-  Minor: "bg-slate-100 text-slate-700 ring-slate-500/20",
-  Ok: "bg-emerald-100 text-emerald-700 ring-emerald-600/20",
+/**
+ * Severity → terminal-style bracket label + text colour class.
+ * The real backend severity is preserved; only its presentation changes.
+ */
+export const SEVERITY_STYLE: Record<Severity, { label: string; color: string }> = {
+  Ok: { label: "OK", color: "text-good" },
+  Minor: { label: "MINOR", color: "text-azure" },
+  Warning: { label: "WARNING", color: "text-warn" },
+  Critical: { label: "CRITICAL", color: "text-bad" },
 };
 
-/** Tailwind classes for priority badges. */
-export const PRIORITY_BADGE: Record<Priority, string> = {
-  High: "bg-red-100 text-red-700 ring-red-600/20",
-  Medium: "bg-amber-100 text-amber-800 ring-amber-600/20",
-  Low: "bg-slate-100 text-slate-700 ring-slate-500/20",
+/** Priority → terminal marker glyph, short tag and colour class. */
+export const PRIORITY_STYLE: Record<Priority, { marker: string; tag: string; color: string }> = {
+  High: { marker: "[!]", tag: "HIGH", color: "text-bad" },
+  Medium: { marker: "[~]", tag: "MED", color: "text-warn" },
+  Low: { marker: "[-]", tag: "LOW", color: "text-azure" },
 };
