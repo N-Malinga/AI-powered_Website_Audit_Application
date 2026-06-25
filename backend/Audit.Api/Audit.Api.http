@@ -1,0 +1,21 @@
+@Audit.Api_HostAddress = http://localhost:5171
+
+### Liveness probe
+GET {{Audit.Api_HostAddress}}/health
+Accept: application/json
+
+### Audit a real URL (my choice)
+POST {{Audit.Api_HostAddress}}/api/audit
+Content-Type: application/json
+
+{
+  "url": "https://www.python.org"
+}
+
+### Validation: rejects a non-absolute URL (expect 400 problem details)
+POST {{Audit.Api_HostAddress}}/api/audit
+Content-Type: application/json
+
+{
+  "url": "not-a-url"
+}

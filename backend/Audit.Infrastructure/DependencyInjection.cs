@@ -1,3 +1,4 @@
+using System.Net;
 using Audit.Core.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,10 +18,18 @@ public static class DependencyInjection
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
         services.AddHttpClient<IPageFetcher, HttpPageFetcher>(client =>
-        {
-            client.Timeout = TimeSpan.FromSeconds(10);
-            client.DefaultRequestHeaders.UserAgent.ParseAdd(UserAgent);
-        });
+            {
+                client.Timeout = TimeSpan.FromSeconds(10);
+                client.DefaultRequestHeaders.UserAgent.ParseAdd(UserAgent);
+            })
+            // Many sites serve gzip/deflate/brotli; decompress automatically so the extractor
+            // receives real HTML rather than compressed bytes.
+            .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+            {
+                AutomaticDecompression = DecompressionMethods.GZip
+                    | DecompressionMethods.Deflate
+                    | DecompressionMethods.Brotli
+            });
 
         services.AddScoped<IMetricsExtractor, AngleSharpMetricsExtractor>();
 

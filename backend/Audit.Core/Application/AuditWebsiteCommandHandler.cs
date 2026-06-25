@@ -30,7 +30,7 @@ public sealed class AuditWebsiteCommandHandler : IRequestHandler<AuditWebsiteCom
         var html = await _pageFetcher.FetchAsync(request.Url, cancellationToken);
         var metrics = _metricsExtractor.Extract(html);
 
-        // Trimming of content for the prompt is added in the AI phase; pass raw HTML for now.
+        // The analyzer trims the raw HTML (headings + first 600 words) when building its prompt.
         var analysis = await _aiAnalyzer.AnalyzeAsync(metrics, html, cancellationToken);
 
         return new AuditResult(
