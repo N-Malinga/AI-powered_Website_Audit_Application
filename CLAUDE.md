@@ -13,7 +13,7 @@ analysis in separate layers with separate interfaces.
 - Target framework: **net10.0** (matches installed SDK 10).
 - Projects: `Audit.Core`, `Audit.Infrastructure`, `Audit.Api`, `Audit.Tests`.
   References: Api → Infrastructure → Core; Tests → all three.
-- `frontend/` — React UI placeholder (not built yet).
+- `frontend/` — React + Vite + TypeScript single-page UI (see Frontend section).
 
 ## Backend architecture (ASP.NET Core)
 - **Core**: domain models, interfaces, MediatR command + handler, FluentValidation,
@@ -62,10 +62,23 @@ analysis in separate layers with separate interfaces.
   logged; result surfaced as `GroundingResult`.
 - Transient retry: one exponential-backoff retry on 429 (rate limited) and 503 (overloaded).
 
+## Frontend (frontend/ — React 19 + Vite 8 + TypeScript)
+- Styling: **Tailwind v4** via `@tailwindcss/vite` (no PostCSS config); theme tokens + base in
+  `src/index.css`. Clean, professional, agency-oriented look.
+- Single screen (`src/App.tsx`): URL input + Audit button → three separated sections
+  (Factual Metrics stat grid, AI Insights by the 5 categories with severity badges,
+  Recommendations sorted High→Low with priority badges + reasoning) + a collapsible
+  "View reasoning trace" panel rendering the prompt log and grounding summary.
+- State machine `idle | pending | success | error`. **Warms the backend on load** via
+  `pingHealth()`; loading message escalates to "Warming up the backend…" after 4s (Render cold start).
+- `src/types.ts` mirrors the `AuditResult` JSON. `src/api/client.ts` (`auditWebsite`, `pingHealth`)
+  reads `VITE_API_URL` (`.env`; fallback `http://localhost:5171`) and normalizes RFC7807 errors.
+- `src/lib/format.ts`: category labels/order, priority sort rank, severity/priority badge colors.
+
 ## Conventions
 - C# records for DTOs. Nullable enabled. async everywhere.
 - No secrets in code. `GEMINI_API_KEY` from config/env (read via IConfiguration).
-- Frontend (React) keeps Metrics, Insights, and Recommendations visually separate.
+- Frontend keeps Metrics, Insights, and Recommendations visually separate.
 
 ## Key packages
 MediatR 12.4.1, FluentValidation 11.11.0 (+ DI extensions), AngleSharp 1.1.2,
@@ -74,5 +87,7 @@ Microsoft.Extensions.Http / Configuration.Abstractions.
 ## Commands
 - Build: `dotnet build backend/Audit.slnx`
 - Test: `dotnet test backend/Audit.slnx`
-- Run: set `GEMINI_API_KEY`, then `dotnet run --project backend/Audit.Api`
-  (health at `/health`, audit via `POST /api/audit` `{"url":"https://..."}`).
+- Run backend: set `GEMINI_API_KEY`, then `dotnet run --project backend/Audit.Api`
+  (health at `/health`, audit via `POST /api/audit` `{"url":"https://..."}`; listens :5171).
+- Run frontend: `cd frontend && npm install && npm run dev` (:5173).
+  Build/type-check: `npm run build`.
